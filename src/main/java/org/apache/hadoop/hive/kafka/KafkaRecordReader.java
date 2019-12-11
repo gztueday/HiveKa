@@ -187,7 +187,7 @@ public class KafkaRecordReader implements RecordReader<KafkaKey, AvroGenericReco
   @Override
   public boolean next(KafkaKey key, AvroGenericRecordWritable value) throws IOException {
 
-    Message message = null;
+//    Message message = null;
 
     while (true) {
       try {
@@ -236,7 +236,7 @@ public class KafkaRecordReader implements RecordReader<KafkaKey, AvroGenericReco
           byte[] keyBytes = getBytes(msgKey);
           // check the checksum of message.
           // If message has partition key, need to construct it with Key for checkSum to match
-          Message messageWithKey = new Message(bytes,keyBytes);
+          Message messageWithKey = new Message(bytes,keyBytes,System.currentTimeMillis(),);
           Message messageWithoutKey = new Message(bytes);
           long checksum = key.getChecksum();
           if (checksum != messageWithKey.checksum() && checksum != messageWithoutKey.checksum()) {

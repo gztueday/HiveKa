@@ -18,22 +18,19 @@
 
 package org.apache.hadoop.hive.kafka;
 
-import org.apache.hadoop.hive.metastore.api.hive_metastoreConstants;
 import org.apache.hadoop.hive.ql.plan.TableDesc;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 public class KafkaBackedTableProperties {
   private static final Logger LOG = Logger.getLogger(KafkaBackedTableProperties.class);
-  public static final String KAFKA_URI = "kafka.service.uri";
-  public static final String KAFKA_URL = "kafka.service.url";
+  public static final String KAFKA_URI = "bootstrap.servers";
+//  public static final String KAFKA_URL = "kafka.service.url";
   public static final String KAFKA_PORT = "kafka.service.port";
   public static final String KAFKA_WHITELIST_TOPICS = "kafka.whitelist.topics";
-  public static final String KAFKA_AVRO_SCHEMA_FILE = "kafka.avro.schema.file";
+  public static final String KAFKA_AVRO_SCHEMA_URL = "kafka.avro.schema.url";
   public static final String COLUMN_NAMES = "columns";
   public static final String COLUMN_TYPES = "columns.types";
   public static final String COLUMN_COMMENTS = "columns.comments";
@@ -51,10 +48,10 @@ public class KafkaBackedTableProperties {
     jobProperties.put(KAFKA_WHITELIST_TOPICS, kafkaWhitelistTopics);
 
     // Set kafka.avro.schema.file in the jobProperty
-    String kafkaAvroSchemaFile = tableProperties.getProperty(KAFKA_AVRO_SCHEMA_FILE, null);
+    String kafkaAvroSchemaFile = tableProperties.getProperty(KAFKA_AVRO_SCHEMA_URL, null);
     if (kafkaAvroSchemaFile != null) {
-      LOG.debug("Kafka avro schema file : " + kafkaAvroSchemaFile);
-      jobProperties.put(KAFKA_AVRO_SCHEMA_FILE, kafkaAvroSchemaFile);
+      LOG.debug("Kafka avro schema url : " + kafkaAvroSchemaFile);
+      jobProperties.put(KAFKA_AVRO_SCHEMA_URL, kafkaAvroSchemaFile);
     }
 
     // Set kafka.url and kafka.port in the jobProperty
@@ -65,7 +62,7 @@ public class KafkaBackedTableProperties {
     String kafkaUrl = uriSplits[0];
     String kafkaPort = uriSplits[1];
     LOG.debug("Kafka URL : " + kafkaUrl);
-    jobProperties.put(KAFKA_URL, kafkaUrl);
+//    jobProperties.put(KAFKA_URL, kafkaUrl);
     LOG.debug("Kafka PORT : " + kafkaPort);
     jobProperties.put(KAFKA_PORT, kafkaPort);
 

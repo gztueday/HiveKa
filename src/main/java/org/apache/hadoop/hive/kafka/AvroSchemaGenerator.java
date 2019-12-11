@@ -23,7 +23,7 @@ public class AvroSchemaGenerator {
     List<TypeInfo> columnTypes = TypeInfoUtils.getTypeInfosFromTypeString(columnTypesStr);
     List<String> columnComments;
     if (columnCommentsStr.isEmpty()) {
-      columnComments = new ArrayList<String>();
+      columnComments = new ArrayList<>();
     } else {
       columnComments = Arrays.asList(columnCommentsStr.split(","));
     }

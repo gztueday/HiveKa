@@ -22,8 +22,8 @@ public class MemorySchemaRegistry<S> implements SchemaRegistry<S> {
 	public void init(Properties props) {}
 
 	public MemorySchemaRegistry() {
-		this.schemasById = new ConcurrentHashMap<MemorySchemaRegistryTuple, S>();
-		this.latest = new ConcurrentHashMap<String, MemorySchemaRegistryTuple>();
+		this.schemasById = new ConcurrentHashMap<>();
+		this.latest = new ConcurrentHashMap<>();
 		this.ids = new AtomicLong(0);
 	}
 
