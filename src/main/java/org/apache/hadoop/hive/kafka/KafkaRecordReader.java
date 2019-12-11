@@ -97,7 +97,7 @@ public class KafkaRecordReader implements RecordReader<KafkaKey, AvroGenericReco
     ClassLoader loader = KafkaRecordReader.class.getClassLoader();
     log.info("PWD: " + System.getProperty("user.dir"));
     log.info("classloader: " + loader.getClass());
-    log.info("org.apache.avro.Schema: " + loader.getResource("org/apache/avro/Schema.class"));
+//    log.info("org.apache.avro.Schema: " + loader.getResource("org/apache/avro/Schema.class"));
 
     this.split = (KafkaSplit) split;
     this.conf = conf;
@@ -115,7 +115,7 @@ public class KafkaRecordReader implements RecordReader<KafkaKey, AvroGenericReco
 
     beginTimeStamp = 0;
 
-    ignoreServerServiceList = new HashSet<String>();
+    ignoreServerServiceList = new HashSet<>();
 
     this.totalBytes = this.split.getLength();
   }
@@ -188,7 +188,6 @@ public class KafkaRecordReader implements RecordReader<KafkaKey, AvroGenericReco
   public boolean next(KafkaKey key, AvroGenericRecordWritable value) throws IOException {
 
 //    Message message = null;
-
     while (true) {
       try {
         if (reader == null || !reader.hasNext()) {

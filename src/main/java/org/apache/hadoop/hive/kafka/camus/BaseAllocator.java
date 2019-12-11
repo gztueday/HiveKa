@@ -45,7 +45,7 @@ public class BaseAllocator extends WorkAllocator{
     
     reverseSortRequests(requests);
 
-    List<InputSplit> kafkaETLSplits = new ArrayList<InputSplit>();
+    List<InputSplit> kafkaETLSplits = new ArrayList<>();
     Path[] tablePaths = FileInputFormat.getInputPaths(conf);
 
     for (int i = 0; i < numTasks; i++) {

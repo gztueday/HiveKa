@@ -1,7 +1,6 @@
 package org.apache.hadoop.hive.kafka.camus;
 
 import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapreduce.JobContext;
 
 import java.util.Map.Entry;
 import java.util.Properties;

@@ -240,10 +240,9 @@ public class KafkaInputFormat implements InputFormat<KafkaKey, AvroGenericRecord
    public InputSplit[] getSplits(JobConf conf, int numSplits) throws IOException {
       ArrayList<CamusRequest> finalRequests;
       HashMap<LeaderInfo, ArrayList<TopicAndPartition>> offsetRequestInfo = new HashMap<>();
+      // Get Metadata for all topics
+      List<TopicMetadata> topicMetadataList = getKafkaMetadata(conf);
       try {
-
-         // Get Metadata for all topics
-         List<TopicMetadata> topicMetadataList = getKafkaMetadata(conf);
 
          // Filter any white list topics
          HashSet<String> whiteListTopics = new HashSet<String>(Arrays.asList(getKafkaWhitelistTopic(conf)));
@@ -377,8 +376,7 @@ public class KafkaInputFormat implements InputFormat<KafkaKey, AvroGenericRecord
                     request,
                     //TODO: factor out kafka specific request functionality
                     new KafkaKey(request.getTopic(), ((KafkaRequest) request).getLeaderId(),
-                            request.getPartition(), 0, request
-                            .getOffset()));
+                            request.getPartition(), 0, request.getOffset()));
          }
          log.info(request);
       }
